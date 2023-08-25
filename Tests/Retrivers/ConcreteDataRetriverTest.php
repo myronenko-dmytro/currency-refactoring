@@ -5,7 +5,7 @@ namespace Tests\Retrivers;
 use Myronenkod\TestProject\Exceptions\DataFormatException;
 use Myronenkod\TestProject\Exceptions\JsonDecodeException;
 use PHPUnit\Framework\TestCase;
-use Myronenkod\TestProject\Retrivers\ConcreteDataRetriver;
+use Myronenkod\TestProject\Retrivers\FileDataRetriver;
 
 class ConcreteDataRetriverTest extends TestCase
 {
@@ -24,7 +24,7 @@ class ConcreteDataRetriverTest extends TestCase
 
     public function testSuccessCase(): void
     {
-        $concreteDataRetriver = new ConcreteDataRetriver($this->getIncludePath("success.txt"));
+        $concreteDataRetriver = new FileDataRetriver($this->getIncludePath("success.txt"));
 
         foreach ($concreteDataRetriver as $item) {
 
@@ -39,7 +39,7 @@ class ConcreteDataRetriverTest extends TestCase
     {
         $this->expectException(JsonDecodeException::class);
 
-        $concreteDataRetriver = new ConcreteDataRetriver($this->getIncludePath("invalid-wrong-format.txt"));
+        $concreteDataRetriver = new FileDataRetriver($this->getIncludePath("invalid-wrong-format.txt"));
 
         foreach ($concreteDataRetriver as $item) {
             $test = 1;
@@ -50,7 +50,7 @@ class ConcreteDataRetriverTest extends TestCase
     {
         $this->expectException(DataFormatException::class);
         $this->expectExceptionMessage("Failed fields validation: [bin, amount, currency]");
-        $concreteDataRetriver = new ConcreteDataRetriver($this->getIncludePath("invalid-wrong-data.txt"));
+        $concreteDataRetriver = new FileDataRetriver($this->getIncludePath("invalid-wrong-data.txt"));
 
         foreach ($concreteDataRetriver as $item) {
             $test = 1;

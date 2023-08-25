@@ -1,7 +1,6 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Myronenkod\TestProject\Views;
-
 
 class TableView
 {
@@ -9,9 +8,9 @@ class TableView
     {
         $output = [];
         $maxlen = 0;
-        foreach($data as $item) {
-            $str = (string) $item;
-            $maxlen = $maxlen < strlen($str) ? strlen($str): $maxlen;
+        foreach ($data as $item) {
+            $str = (string)$item;
+            $maxlen = $maxlen < strlen($str) ? strlen($str) : $maxlen;
             $output[] = $str;
         }
 

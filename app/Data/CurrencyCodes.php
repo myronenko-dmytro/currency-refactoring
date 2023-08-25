@@ -1,7 +1,6 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Myronenkod\TestProject\Data;
-
 class CurrencyCodes
 {
     private static $currencyCodes = [

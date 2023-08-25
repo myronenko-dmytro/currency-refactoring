@@ -1,10 +1,10 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Myronenkod\TestProject;
 
 class Config
 {
-    public function __construct(private string $apiKey,private  int $times,private  int $sleep)
+    public function __construct(private string $apiKey, private int $times, private int $sleep)
     {
 
     }

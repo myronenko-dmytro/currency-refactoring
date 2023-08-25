@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Myronenkod\TestProject\Services;
 
@@ -6,6 +6,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Myronenkod\TestProject\Config;
 use Myronenkod\TestProject\Entities\IssuerInfo;
+use Myronenkod\TestProject\Entities\IssuerInfoInterface;
 
 class BinlistLookupLimitService implements BinlistLookupServiceInterface
 {
@@ -13,7 +14,7 @@ class BinlistLookupLimitService implements BinlistLookupServiceInterface
     {
     }
 
-    public function lookup(int $bin): IssuerInfo
+    public function lookup(int $bin): IssuerInfoInterface
     {
         $iteration = 0;
         while (true) {

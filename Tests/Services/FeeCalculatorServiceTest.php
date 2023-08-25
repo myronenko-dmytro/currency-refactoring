@@ -1,11 +1,11 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Tests\Services;
 
 use Myronenkod\TestProject\Entities\IssuerInfo;
 use Myronenkod\TestProject\Entities\Rates;
 use Myronenkod\TestProject\Exceptions\RateForCountryCodeException;
-use Myronenkod\TestProject\Retrivers\ConcreteDataRetriver;
+use Myronenkod\TestProject\Retrivers\FileDataRetriver;
 use Myronenkod\TestProject\Services\BinlistLookupServiceInterface;
 use Myronenkod\TestProject\Services\ExchangeRatesService;
 use Myronenkod\TestProject\Services\FeeCalculatorService;
@@ -22,24 +22,29 @@ class FeeCalculatorServiceTest extends TestCase
 
         $binlistMock = $this->createMock(BinlistLookupServiceInterface::class);
 
-        $binlistMock->method('lookup')->willReturn(new IssuerInfo(BinlistMock::get()));
+        $issuerInsideEu = $this->createMock(IssuerInfo::class);
+        $issuerInsideEu->method('isEuBased')->willReturn(true);
 
-        $dataRetriver = new ConcreteDataRetriver($this->getPath());
+        $issuerOutsideEu = $this->createMock(IssuerInfo::class);
+        $issuerOutsideEu->method('isEuBased')->willReturn(false);
+
+        $binlistMock->method('lookup')->willReturnOnConsecutiveCalls(
+            $issuerInsideEu,
+            $issuerOutsideEu
+        );
+
+        $dataRetriver = new FileDataRetriver($this->getPath());
 
         $feeCalculator = new FeeCalculatorService($mock, $binlistMock);
 
         $data = $feeCalculator->handle($dataRetriver, 'EUR');
 
-        $eurResult = 100.00 / 1 * 0.01;
-        $usdResult = 50.00 / 1 * 0.02;
-
-        $this->assertEquals($data[0], $eurResult);
-        $this->assertEquals($data[1], $usdResult);
+        $this->assertEquals(1, $data[0]);
+        $this->assertEquals(0.93, $data[1]);
     }
 
     public function getPath() {
         return join(DIRECTORY_SEPARATOR, [getcwd(),"Tests", "Mocks", "Raw", 'success.txt']);
-
     }
 
     public function testRateNotAvaileble()
@@ -54,7 +59,7 @@ class FeeCalculatorServiceTest extends TestCase
         $binlistMock->method('lookup')->willReturn(new IssuerInfo(BinlistMock::get()));
 
 
-        $dataRetriver = new ConcreteDataRetriver($this->getPath());
+        $dataRetriver = new FileDataRetriver($this->getPath());
 
         $feeCalculator = new FeeCalculatorService($exchageMock, $binlistMock);
 

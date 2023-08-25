@@ -1,10 +1,10 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Myronenkod\TestProject\Entities;
 
 use Myronenkod\TestProject\Data\EuCountries;
 
-class IssuerInfo
+class IssuerInfo implements IssuerInfoInterface
 {
     public function __construct(readonly private array $data)
     {

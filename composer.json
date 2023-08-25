@@ -3,7 +3,6 @@
     "description": "This is test project",
     "type": "project",
     "require": {
-        "phpunit/phpunit": "^10.3",
         "guzzlehttp/guzzle": "^7.7"
     },
     "autoload": {
@@ -17,5 +16,8 @@
             "name": "Myronenko Dmytro",
             "email": "myronenko.dmytro.v@gmail.com"
         }
-    ]
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "^10.3"
+    }
 }

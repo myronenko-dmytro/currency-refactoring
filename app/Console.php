@@ -4,7 +4,8 @@ namespace Myronenkod\TestProject;
 
 class Console
 {
-    public function getArg(int $arg): string {
+    public function getArg(int $arg): string
+    {
         return $_SERVER['argv'][$arg];
     }
 }

@@ -1,10 +1,10 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Myronenkod\TestProject\Entities;
 
 use Myronenkod\TestProject\Exceptions\RateForCountryCodeException;
 
-class Rates
+class Rates implements RatesInterface
 {
     public function __construct(private array $rateData)
     {

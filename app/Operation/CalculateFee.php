@@ -1,10 +1,10 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Myronenkod\TestProject\Operation;
 
 use Myronenkod\TestProject\Config;
 use Myronenkod\TestProject\Console;
-use Myronenkod\TestProject\Retrivers\ConcreteDataRetriver;
+use Myronenkod\TestProject\Retrivers\FileDataRetriver;
 use Myronenkod\TestProject\Services\BinlistLookupLimitService;
 use Myronenkod\TestProject\Services\BinlistLookupService;
 use Myronenkod\TestProject\Services\ExchangeRatesService;
@@ -30,7 +30,7 @@ class CalculateFee
         $filePath = $this->console->getArg(1);
         $currency = $this->console->getArg(2);
 
-        $dataRetriver = new ConcreteDataRetriver($filePath);
+        $dataRetriver = new FileDataRetriver($filePath);
 
         (new TableView())->show(
             $feeCalculator->handle($dataRetriver, $currency)

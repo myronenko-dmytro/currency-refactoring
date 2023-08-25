@@ -1,12 +1,13 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Myronenkod\TestProject\Services;
 
 use GuzzleHttp\Client;
 use Myronenkod\TestProject\Config;
 use Myronenkod\TestProject\Entities\Rates;
+use Myronenkod\TestProject\Entities\RatesInterface;
 
-class ExchangeRatesService
+class ExchangeRatesService implements ExchangeRatesServiceInterface
 {
     public function __construct(private Client $client, private Config $config)
     {
@@ -18,7 +19,7 @@ class ExchangeRatesService
      * @return array
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function handle(string $base = 'EUR'): Rates
+    public function handle(string $base = 'EUR'): RatesInterface
     {
         $response = $this->client->get("http://api.exchangeratesapi.io/v1/latest", [
             'query' => [

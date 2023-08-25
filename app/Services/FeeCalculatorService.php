@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Myronenkod\TestProject\Services;
 
@@ -8,7 +8,7 @@ use Myronenkod\TestProject\Retrivers\DataRetriverInterface;
 class FeeCalculatorService
 {
     public function __construct(
-        private ExchangeRatesService $exchangeRatesService,
+        private ExchangeRatesServiceInterface $exchangeRatesService,
         private BinlistLookupServiceInterface $binlistLookupService
     ) {
     }
@@ -23,7 +23,7 @@ class FeeCalculatorService
 
             $transaction = new Transaction($transactionInfo->getAmount(), $transactionInfo->getCurrency(), $issuerInfo);
 
-            $feeList[] = $transaction->calculateFee($rates);
+            $feeList[] = $transaction->calculateCommission($rates);
         }
 
         return $feeList;
