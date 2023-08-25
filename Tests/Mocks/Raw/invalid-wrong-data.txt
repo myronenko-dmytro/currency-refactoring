@@ -1,0 +1,2 @@
+{"bin":"agag","amount":"sdas","currency":"agasgas"}
+{"bin":"sadas","amount":"asdaf","currency":"asadd"}

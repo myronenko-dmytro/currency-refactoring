@@ -1,0 +1,21 @@
+{
+    "name": "myronenkod/test-project",
+    "description": "This is test project",
+    "type": "project",
+    "require": {
+        "phpunit/phpunit": "^10.3",
+        "guzzlehttp/guzzle": "^7.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Myronenkod\\TestProject\\": "app/",
+            "Tests\\": "Tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Myronenko Dmytro",
+            "email": "myronenko.dmytro.v@gmail.com"
+        }
+    ]
+}
