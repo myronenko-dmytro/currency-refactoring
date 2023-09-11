@@ -3,6 +3,13 @@
 php .\index.php .\transactions.txt EUR
 ```
 
+**php .\index.php {1} {2}**
+Where
+
+{1} - is file with params
+
+{2} - base currency we are working with.
+
 
 # Notes
 1. I was trying not to use any libraries, however there is two exceptions as I've added GUZZLE and phpunit lib.
