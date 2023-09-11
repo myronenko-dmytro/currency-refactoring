@@ -8,11 +8,10 @@ class Transaction
     {
     }
 
-    public function calculateCommission(Rates $rates)
+    public function calculateCommission(Rates $rates, float $inEuComission, float $outOfEuCommission): float
     {
-        //  if ($value[2] == 'EUR' or $rate == 0)
         $amountInEur = $this->amount / $rates->get($this->currency);
-        $fee = $this->issuerInfo->isEuBased() ? $amountInEur * 0.01 : $amountInEur * 0.02;
+        $fee = $this->issuerInfo->isEuBased() ? $amountInEur * $inEuComission : $amountInEur * $outOfEuCommission;
 
         return ceil($fee * 100) / 100;
     }

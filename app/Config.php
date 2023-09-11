@@ -23,4 +23,24 @@ class Config
     {
         return $this->sleep;
     }
+
+    public function getBinlistUrl(): string
+    {
+        return "https://lookup.binlist.net/";
+    }
+
+    public function getExchangeRateUrl(): string
+    {
+        return "http://api.exchangeratesapi.io/v1/latest";
+    }
+
+    public function inEuComission(): float
+    {
+        return 0.01;
+    }
+
+    public function outOfEuCommision(): float
+    {
+        return 0.02;
+    }
 }

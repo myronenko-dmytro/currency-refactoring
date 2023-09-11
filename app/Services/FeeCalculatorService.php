@@ -2,6 +2,7 @@
 
 namespace Myronenkod\TestProject\Services;
 
+use Myronenkod\TestProject\Config;
 use Myronenkod\TestProject\Entities\Transaction;
 use Myronenkod\TestProject\Retrivers\DataRetriverInterface;
 
@@ -9,7 +10,8 @@ class FeeCalculatorService
 {
     public function __construct(
         private ExchangeRatesServiceInterface $exchangeRatesService,
-        private BinlistLookupServiceInterface $binlistLookupService
+        private BinlistLookupServiceInterface $binlistLookupService,
+        private Config $config
     ) {
     }
 
@@ -21,9 +23,17 @@ class FeeCalculatorService
         foreach($dataRetriver as $transactionInfo) {
             $issuerInfo = $this->binlistLookupService->lookup($transactionInfo->getBin());
 
-            $transaction = new Transaction($transactionInfo->getAmount(), $transactionInfo->getCurrency(), $issuerInfo);
+            $transaction = new Transaction(
+                $transactionInfo->getAmount(),
+                $transactionInfo->getCurrency(),
+                $issuerInfo
+            );
 
-            $feeList[] = $transaction->calculateCommission($rates);
+            $feeList[] = $transaction->calculateCommission(
+                $rates,
+                $this->config->inEuComission(),
+                $this->config->outOfEuCommision()
+            );
         }
 
         return $feeList;

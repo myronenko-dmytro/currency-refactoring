@@ -21,7 +21,7 @@ class ExchangeRatesService implements ExchangeRatesServiceInterface
      */
     public function handle(string $base = 'EUR'): RatesInterface
     {
-        $response = $this->client->get("http://api.exchangeratesapi.io/v1/latest", [
+        $response = $this->client->get($this->config->getExchangeRateUrl(), [
             'query' => [
                 'access_key' => $this->config->getApiKey(),
                 'base' => $base

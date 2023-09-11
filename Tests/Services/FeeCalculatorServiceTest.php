@@ -2,6 +2,7 @@
 
 namespace Tests\Services;
 
+use Myronenkod\TestProject\Config;
 use Myronenkod\TestProject\Entities\IssuerInfo;
 use Myronenkod\TestProject\Entities\Rates;
 use Myronenkod\TestProject\Exceptions\RateForCountryCodeException;
@@ -35,7 +36,7 @@ class FeeCalculatorServiceTest extends TestCase
 
         $dataRetriver = new FileDataRetriver($this->getPath());
 
-        $feeCalculator = new FeeCalculatorService($mock, $binlistMock);
+        $feeCalculator = new FeeCalculatorService($mock, $binlistMock, new Config('test', 1, 1));
 
         $data = $feeCalculator->handle($dataRetriver, 'EUR');
 
@@ -61,7 +62,7 @@ class FeeCalculatorServiceTest extends TestCase
 
         $dataRetriver = new FileDataRetriver($this->getPath());
 
-        $feeCalculator = new FeeCalculatorService($exchageMock, $binlistMock);
+        $feeCalculator = new FeeCalculatorService($exchageMock, $binlistMock, new Config('test', 1, 1));
 
         $exceptionRaised = false;
         try {

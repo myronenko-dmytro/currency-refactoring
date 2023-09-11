@@ -1,9 +1,14 @@
+# How to run 
+```
+php .\index.php .\transactions.txt EUR
+```
+
+
 # Notes
-1. I was trying not to use any libraries, however there is one exclusion as I've added GUZZLE and phpunit lib.
-2. Classes Config, Console, VIew is as simple as possible and were made for showing abstaction and responsibility separation.
-3. In entities i made getters only for data i was using.
-4. Classes CurrencyCodes and EuCountries should be part of internacionalization module and made for symplicity of test task.
-5. I intensionally removed this logic since its imposibble to get rate equal to 0;
+1. I was trying not to use any libraries, however there is two exceptions as I've added GUZZLE and phpunit lib.
+2. Classes Config, Console, View are as simple as possible and were made for showing abstaction and responsibility separation.
+3. Classes CurrencyCodes and EuCountries should be part of internacionalization module and made for simplicity of test task.
+5. I intentionally removed this logic since it's imposibble to get rate equal to 0;
 
     ```if ($value[2] == 'EUR' or $rate == 0)```
 # Task description

@@ -23,9 +23,13 @@ class CalculateFee
             'verify' => false
         ]);
 
-        $binlistLookupService = new BinlistLookupLimitService(new BinlistLookupService($client), $this->config);
+        $binlistLookupService = new BinlistLookupLimitService(
+            new BinlistLookupService($client, $this->config),
+            $this->config
+        );
+
         $exchangeService = new ExchangeRatesService($client, $this->config);
-        $feeCalculator = new FeeCalculatorService($exchangeService, $binlistLookupService);
+        $feeCalculator = new FeeCalculatorService($exchangeService, $binlistLookupService, $this->config);
 
         $filePath = $this->console->getArg(1);
         $currency = $this->console->getArg(2);
